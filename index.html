@@ -34,8 +34,7 @@
   <script>
     const origin='https://dev-server-blush.vercel.app';
     const s=document.createElement('script');s.type='module';s.crossOrigin='anonymous';s.src=origin+'/assets/index-CUnqWTAn.js';document.body.appendChild(s);
-    const key='sram-gram-missions';const done=JSON.parse(localStorage.getItem(key)||'[]');
-    document.querySelectorAll('[data-mission]').forEach(btn=>{if(done.includes(btn.dataset.mission)){btn.textContent='Done';btn.classList.add('done');btn.disabled=true}btn.addEventListener('click',()=>{if(done.includes(btn.dataset.mission))return;done.push(btn.dataset.mission);localStorage.setItem(key,JSON.stringify(done));btn.textContent='Done';btn.classList.add('done');btn.disabled=true;window.Telegram?.WebApp?.HapticFeedback?.notificationOccurred?.('success')})});
+    document.querySelectorAll('[data-mission]').forEach(btn=>btn.addEventListener('click',()=>{window.location.href='/tasks'}));
     document.querySelector('.gm-close').addEventListener('click',()=>document.querySelector('#gram-missions').hidden=true);
   </script>
 </body>
