@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <link rel="stylesheet" href="https://dev-server-blush.vercel.app/assets/styles-Cqn1dCib.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <title>SRAM — Mining Rewards</title>
+  <meta name="theme-color" content="#020816" />
+  <meta name="description" content="Collect SRAM rewards and unlock GRAM server rewards." />
+  <style>
+    html,body,#root{background:transparent!important}
+    body{position:relative;overflow-x:hidden}
+    #sram-prompt-bg{position:fixed;inset:0;z-index:-2;background:#020816;overflow:hidden}
+    #sram-prompt-bg video{width:100%;height:100%;object-fit:cover;object-position:50% 100%;opacity:.48;filter:saturate(.82) contrast(1.08)}
+    #sram-prompt-bg:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(2,8,22,.98) 0%,rgba(2,8,22,.72) 18%,rgba(2,8,22,.78) 100%)}
+    #gram-missions{position:fixed;z-index:50;right:18px;bottom:18px;width:min(370px,calc(100vw - 36px));padding:16px;border:1px solid rgba(255,255,255,.15);border-radius:20px;background:rgba(10,16,35,.78);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);box-shadow:0 20px 70px rgba(0,0,0,.35);color:#fff;font-family:Outfit,system-ui,sans-serif}
+    #gram-missions[hidden]{display:none}
+    .gm-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.gm-kicker{font-size:10px;letter-spacing:.16em;color:#9eb4ff;font-weight:700}.gm-title{font-size:21px;line-height:1.1;margin:5px 0 0;font-weight:600}.gm-close{border:0;background:transparent;color:#9aa7c6;font-size:20px;cursor:pointer}.gm-row{display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:center;padding:12px 0;border-top:1px solid rgba(255,255,255,.08);margin-top:12px}.gm-icon{width:28px;height:28px;border-radius:9px;display:grid;place-items:center;background:rgba(222,183,116,.14);color:#e2c08e;font-size:17px}.gm-copy strong{font-size:12px}.gm-copy p{margin:3px 0 0;color:#a2abc0;font-size:10px;line-height:1.35}.gm-action{text-align:right}.gm-reward{display:block;color:#e2c08e;font-size:9px;white-space:nowrap;margin-bottom:5px}.gm-action button{border:1px solid rgba(141,166,255,.3);border-radius:8px;padding:6px 9px;color:#dce5ff;background:rgba(141,166,255,.14);font-size:10px;font-weight:700;cursor:pointer}.gm-action button.done{color:#68d5b7;background:rgba(80,220,183,.1);border-color:rgba(80,220,183,.25);cursor:default}
+    @media (max-width:640px){#gram-missions{right:12px;bottom:12px;width:calc(100vw - 24px)}}
+  </style>
+</head>
+<body>
+  <div id="sram-prompt-bg" aria-hidden="true"><video autoplay muted loop playsinline preload="auto" poster="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/19548534-c502-431f-904d-24d31b17c471.jpg"><source src="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/0e1b18f2-b590-4b97-96f0-b05e019d07eb.mp4" type="video/mp4"></video></div>
+  <div id="root"></div>
+  <aside id="gram-missions" aria-label="Gram ad missions">
+    <div class="gm-head"><div><div class="gm-kicker">EARN MORE GRAM</div><div class="gm-title">Ad missions</div></div><button class="gm-close" aria-label="Close">×</button></div>
+    <div class="gm-row"><div class="gm-icon">＋</div><div class="gm-copy"><strong>Daily watch</strong><p>Watch one rewarded ad to earn a Gram bonus.</p></div><div class="gm-action"><span class="gm-reward">+0.0010 GRAM</span><button data-mission="daily-watch">Watch ad</button></div></div>
+    <div class="gm-row"><div class="gm-icon">＋</div><div class="gm-copy"><strong>Discover a sponsor</strong><p>Open a featured sponsor message.</p></div><div class="gm-action"><span class="gm-reward">+0.0025 GRAM</span><button data-mission="discover">Open</button></div></div>
+    <div class="gm-row"><div class="gm-icon">＋</div><div class="gm-copy"><strong>Keep your streak</strong><p>Complete today's mission and claim your bonus.</p></div><div class="gm-action"><span class="gm-reward">+0.0050 GRAM</span><button data-mission="streak">Claim</button></div></div>
+  </aside>
+  <script>
+    const origin='https://dev-server-blush.vercel.app';
+    const s=document.createElement('script');s.type='module';s.crossOrigin='anonymous';s.src=origin+'/assets/index-CUnqWTAn.js';document.body.appendChild(s);
+    const key='sram-gram-missions';const done=JSON.parse(localStorage.getItem(key)||'[]');
+    document.querySelectorAll('[data-mission]').forEach(btn=>{if(done.includes(btn.dataset.mission)){btn.textContent='Done';btn.classList.add('done');btn.disabled=true}btn.addEventListener('click',()=>{if(done.includes(btn.dataset.mission))return;done.push(btn.dataset.mission);localStorage.setItem(key,JSON.stringify(done));btn.textContent='Done';btn.classList.add('done');btn.disabled=true;window.Telegram?.WebApp?.HapticFeedback?.notificationOccurred?.('success')})});
+    document.querySelector('.gm-close').addEventListener('click',()=>document.querySelector('#gram-missions').hidden=true);
+  </script>
+</body>
+</html>
